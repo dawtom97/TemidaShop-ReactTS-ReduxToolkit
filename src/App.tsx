@@ -1,18 +1,18 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from './store/store';
-import { incrementByAmount } from './store/features/counter/counterSlice';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { HomePage } from './views/HomePage';
+import { ProductDetails } from './views/ProductDetails';
 
-const App:React.FC = () => {
-  const count = useSelector((state:RootState) => state.counter.value);
-  const dispatch = useDispatch();
+const App: React.FC = () => {
+
   return (
     <div>
-      <p>{count}</p>
-      <button onClick={()=>dispatch(incrementByAmount(23))}>Increase by amount</button>
+      <Routes>
+        <Route path="/" element={<HomePage/>} />
+        <Route path="/product/:id" element={<ProductDetails/>} />
+      </Routes>
     </div>
-  )
-}
+  );
+};
 
 export default App;
-

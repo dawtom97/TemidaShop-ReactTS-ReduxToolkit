@@ -4,7 +4,7 @@ import * as image from './images';
 
 export const products = [
     {
-        id:1,
+        id: '1',
         name: 'Denim Jacket',
         short: 'Ripped Faded Wash Stitch Detail',
         price: 350,

@@ -1,8 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { products } from '../../../db/fakeData'
 
 type SingleProduct = {
-    id: number,
+    id: string,
     name: string,
     short: string,
     price: number,
@@ -13,17 +13,26 @@ type SingleProduct = {
 }
 
 export interface ProductsState {
-    products: SingleProduct[]
+    allItems: SingleProduct[],
+    singleItem: any
 }
 
 const initialState: ProductsState = {
-    products: products
+    allItems: products,
+    singleItem: {}
 }
 
 export const productsSlice = createSlice({
     name: 'products',
     initialState,
-    reducers:{}
+    reducers: {
+        getSingleProduct: (state, action:PayloadAction<string | undefined>) => {
+            state.singleItem = state.allItems.filter(product => product.id === action.payload)
+            console.log(state.singleItem)
+        }
+    }
 })
+
+export const { getSingleProduct } = productsSlice.actions;
 
 export default productsSlice.reducer;
