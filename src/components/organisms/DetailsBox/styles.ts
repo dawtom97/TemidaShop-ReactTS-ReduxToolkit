@@ -17,3 +17,13 @@ export const InfoBox = styled.div`
   position: relative;
   top:-25px;
 `
+
+export const Filters = styled.div`
+   display: flex;
+   margin:20px 0;
+   justify-content: space-between;
+`
+
+export const Buttons = styled.div`
+
+`
