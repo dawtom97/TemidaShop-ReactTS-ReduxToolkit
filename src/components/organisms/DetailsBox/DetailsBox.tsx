@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { Button } from '../../atoms/Button';
 import { FilterBox } from '../../molecules/FilterBox/FilterBox';
 import { Heading } from '../../molecules/Heading/Heading';
@@ -8,6 +8,7 @@ import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import { AiFillHeart } from 'react-icons/ai';
 import { IoIosArrowBack } from 'react-icons/io';
 import { ReturnButton } from '../../atoms/ReturnButton';
+import { ImagesBox } from '../../molecules/ImagesBox/ImagesBox';
 
 export const DetailsBox = ({ product }: DetailsProps) => {
   const [currentImage, setCurrentImage] = useState(product.images[0]);
@@ -21,6 +22,8 @@ export const DetailsBox = ({ product }: DetailsProps) => {
     return () => setCurrentImage(null);
   }, [product]);
 
+  console.log(currentImage);
+
   return (
     <Styled.Wrapper>
       <ReturnButton to='/'>
@@ -28,11 +31,7 @@ export const DetailsBox = ({ product }: DetailsProps) => {
       </ReturnButton>
       <img src={currentImage} />
 
-      <Styled.Images>
-        {/* {product.images.map((image: string, index: string) => (
-          <img isCurrent={currentImage === index ? true : false} onClick={() => handleImageChange(index)} key={index} src={image} />
-        ))} */}
-      </Styled.Images>
+      <ImagesBox images={product.images} currentImage={currentImage} onClick={handleImageChange} />
 
       <Styled.InfoBox>
         <Styled.Categories>
