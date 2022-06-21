@@ -1,7 +1,8 @@
 
 
 export type ProductProps = {
-    images: string[] | string,
+    images: string[] | string | any,
+    category: string[],
     title:string,
     price:number,
     id:string,

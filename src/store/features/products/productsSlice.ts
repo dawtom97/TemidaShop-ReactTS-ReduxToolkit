@@ -9,7 +9,8 @@ type SingleProduct = {
     salePrice: null | number,
     colors: string[],
     sizes: string[],
-    images: string[]
+    images: string[],
+    category:string[]
 }
 
 export interface ProductsState {

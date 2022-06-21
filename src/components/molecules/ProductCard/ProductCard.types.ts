@@ -2,5 +2,6 @@ export type ProductCardProps = {
     images: string[],
     title: string,
     price:number,
-    id:string
+    id:string,
+    category: string[]
 }

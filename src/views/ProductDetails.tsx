@@ -8,7 +8,6 @@ export const ProductDetails = () => {
   const { id } = useParams<string>();
   const dispatch = useDispatch();
   const product = useSelector(({ products }: any) => products.singleItem[0]);
-  console.log(product);
 
   useEffect(() => {
     dispatch(getSingleProduct(id));

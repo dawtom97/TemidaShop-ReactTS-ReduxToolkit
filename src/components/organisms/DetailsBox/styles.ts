@@ -1,11 +1,16 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-
+  position: relative;
   & > img {
     width:100%;
-    height: 500px;
+    height: 580px;
     object-fit: cover;
+  }
+  & > a {
+    position: absolute;
+    top:20px;
+    left:20px;
   }
 `
 
@@ -25,5 +30,47 @@ export const Filters = styled.div`
 `
 
 export const Buttons = styled.div`
+   display: flex;
+   justify-content: space-between;
+`
 
+export const Categories = styled.div`
+   position: absolute;
+   top:-40px;
+   right:20px;
+
+   & > span {
+    display: inline-block;
+    background-color: #ffffffa8;
+    min-width:80px;
+    height: 25px;
+    margin-left: 10px;
+    border-radius: 8px;
+    line-height: 25px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 1.3rem;
+   }
+`
+
+export const Images = styled.div`
+   position: absolute;
+   top:40%;
+   left:0;
+   display: flex;
+   flex-direction: column;
+   transform: translateY(-50%);
+   background-color: #ffffffa8;
+   
+   border-radius: 8px;
+  & > img {
+    width:55px;
+    margin:5px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 8px;
+    opacity: 0.8;
+  }
 `

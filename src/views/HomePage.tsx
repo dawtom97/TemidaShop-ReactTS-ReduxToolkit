@@ -15,6 +15,7 @@ export const HomePage = () => {
           id={product.id}
           title={product.title}
           price={product.price}
+          category={product.category}
         />
       ))}
     </div>
