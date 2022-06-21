@@ -55,7 +55,11 @@ export const Categories = styled.div`
    }
 `
 
-export const Images = styled.div`
+type StylesProps = {
+  isCurrent?:string
+}
+
+export const Images = styled.div<StylesProps>`
    position: absolute;
    top:40%;
    left:0;
@@ -71,6 +75,6 @@ export const Images = styled.div`
     height: 55px;
     object-fit: cover;
     border-radius: 8px;
-    opacity: 0.8;
+    opacity: ${({isCurrent}) => isCurrent ? 1 : 0.6}
   }
 `

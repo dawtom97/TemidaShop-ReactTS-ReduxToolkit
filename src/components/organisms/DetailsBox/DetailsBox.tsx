@@ -29,9 +29,9 @@ export const DetailsBox = ({ product }: DetailsProps) => {
       <img src={currentImage} />
 
       <Styled.Images>
-        {product.images.map((image: string, index: string) => (
-          <img onClick={() => handleImageChange(index)} key={index} src={image} />
-        ))}
+        {/* {product.images.map((image: string, index: string) => (
+          <img isCurrent={currentImage === index ? true : false} onClick={() => handleImageChange(index)} key={index} src={image} />
+        ))} */}
       </Styled.Images>
 
       <Styled.InfoBox>
