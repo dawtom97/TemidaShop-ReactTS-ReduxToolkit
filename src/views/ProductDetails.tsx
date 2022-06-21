@@ -1,29 +1,26 @@
-import React, { useEffect} from 'react'
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
+import { DetailsBox } from '../components/organisms/DetailsBox/DetailsBox';
 import { getSingleProduct } from '../store/features/products/productsSlice';
 
 export const ProductDetails = () => {
-  const {id} = useParams<string>();
+  const { id } = useParams<string>();
   const dispatch = useDispatch();
-  const product = useSelector(({products}:any) => products.singleItem[0]);
-  console.log(product)
+  const product = useSelector(({ products }: any) => products.singleItem[0]);
+  console.log(product);
 
-  useEffect(()=>{
-   dispatch(getSingleProduct(id));
+  useEffect(() => {
+    dispatch(getSingleProduct(id));
+  }, []);
 
-  },[])
-  
+  if (product) {
+    return (
+      <div>
+        <DetailsBox product={product} />
+      </div>
+    );
+  }
 
-  return (
-    <div>
-      {product ? (
-        <img src={product.images[0]}/>
-      ):
-      (
-        <p>Loading.....</p>
-      )
-      }
-    </div>
-  )
-}
+  return <p>Loading</p>;
+};

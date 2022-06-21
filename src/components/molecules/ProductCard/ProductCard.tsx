@@ -4,12 +4,12 @@ import { Paragraph } from '../../atoms/Paragraph';
 import { ProductCardProps } from './ProductCard.types';
 import * as Styled from './styles';
 
-export const ProductCard = ({ image, title, price, id }: ProductCardProps) => {
+export const ProductCard = ({ images, title, price, id }: ProductCardProps) => {
   return (
     <Styled.Wrapper>
       <NavLink to={`/product/${id}`}>
       <Styled.ImageBox>
-        <img src={image} alt={title} />
+        <img src={images[0]} alt={title} />
       </Styled.ImageBox>
       </NavLink>
       <Paragraph>{title}</Paragraph>

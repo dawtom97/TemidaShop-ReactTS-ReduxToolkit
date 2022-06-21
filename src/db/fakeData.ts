@@ -5,11 +5,11 @@ import * as image from './images';
 export const products = [
     {
         id: '1',
-        name: 'Denim Jacket',
+        title: 'Denim Jacket',
         short: 'Ripped Faded Wash Stitch Detail',
         price: 350,
         salePrice: null,
-        colors: ['red', 'green'],
+        colors: ['#ea366b', '#66c69d'],
         sizes: ['s', 'm', 'l'],
         images: [
             image.product1

@@ -3,7 +3,7 @@ import { products } from '../../../db/fakeData'
 
 type SingleProduct = {
     id: string,
-    name: string,
+    title: string,
     short: string,
     price: number,
     salePrice: null | number,

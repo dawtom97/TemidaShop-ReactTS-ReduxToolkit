@@ -10,10 +10,10 @@ export const HomePage = () => {
     <div>
       {allItems.map((product) => (
         <ProductCard
-          image={product.images[0]}
+          images={product.images}
           key={product.id}
           id={product.id}
-          title={product.name}
+          title={product.title}
           price={product.price}
         />
       ))}
