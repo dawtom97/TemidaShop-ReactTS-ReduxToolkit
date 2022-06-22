@@ -4,13 +4,15 @@ import { GlobalStylesProps } from '../../types/GlobalStyles.types';
 type ButtonProps = {
   isSecondary?: boolean,
   theme: GlobalStylesProps,
-  isIconButton?: boolean
+  isIconButton?: boolean,
+  isLiked?: boolean
 }
 
 export const Button = styled.button<ButtonProps>`
   background-color: ${(props: ButtonProps) => props.isSecondary ? props.theme.white : props.theme.secondary};
 border-radius: 8px;
 height: 45px;
+cursor: pointer;
 padding: 0px 50px;
 color: ${(props: ButtonProps) => props.isSecondary ? props.theme.grey : props.theme.white};;
 font-size: 2.5rem;
@@ -25,6 +27,7 @@ box-shadow: ${({ theme }) => theme.shadowPrimary};
 
 & > svg {
     font-size: 3.5rem;
+    color:${({isLiked})=>isLiked ? '#f24141': 'inherit'};
 }
 ${({ isSecondary }) => isSecondary && css`
    width:45px;

@@ -15,12 +15,14 @@ type SingleProduct = {
 
 export interface ProductsState {
     allItems: SingleProduct[],
-    singleItem: any
+    singleItem: any,
+    likedItems: SingleProduct[]
 }
 
 const initialState: ProductsState = {
     allItems: products,
-    singleItem: {}
+    singleItem: {},
+    likedItems: [products[1]]
 }
 
 export const productsSlice = createSlice({
@@ -29,11 +31,16 @@ export const productsSlice = createSlice({
     reducers: {
         getSingleProduct: (state, action:PayloadAction<string | undefined>) => {
             state.singleItem = state.allItems.filter(product => product.id === action.payload)
-            console.log(state.singleItem)
+        },
+        addToLiked: (state,action:PayloadAction<SingleProduct> ) => {          
+           state.likedItems = state.likedItems.concat(action.payload);
+        },
+        removeFromLiked: (state,action:PayloadAction<string>) => {
+            state.likedItems = state.likedItems.filter(item => item.id !== action.payload)
         }
     }
 })
 
-export const { getSingleProduct } = productsSlice.actions;
+export const { getSingleProduct,addToLiked,removeFromLiked } = productsSlice.actions;
 
 export default productsSlice.reducer;
