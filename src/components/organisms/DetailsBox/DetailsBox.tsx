@@ -1,8 +1,8 @@
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '../../atoms/Button';
 import { FilterBox } from '../../molecules/FilterBox/FilterBox';
 import { Heading } from '../../molecules/Heading/Heading';
-import { DetailsProps } from './Details.types';
+import { DetailsProps} from './Details.types';
 import * as Styled from './styles';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import { AiFillHeart } from 'react-icons/ai';
@@ -12,13 +12,15 @@ import { ImagesBox } from '../../molecules/ImagesBox/ImagesBox';
 
 export const DetailsBox = ({ product }: DetailsProps) => {
   const [currentImage, setCurrentImage] = useState(product.images[0]);
+  const [filterColor, setFilterColor] = useState<string>('');
+  const [filterSize, setFilterSize] = useState<string>('');
 
   const handleImageChange = (index: string) => setCurrentImage(product.images[index]);
-  console.log(product);
 
   useEffect(() => {
     setCurrentImage(product.images[0]);
-
+    setFilterColor(product.colors[0]);
+    setFilterSize(product.sizes[0]);
     return () => setCurrentImage(null);
   }, [product]);
 
@@ -41,8 +43,19 @@ export const DetailsBox = ({ product }: DetailsProps) => {
         </Styled.Categories>
         <Heading title={product.title} short={product.short} />
         <Styled.Filters>
-          <FilterBox isGraphical title='Colors' options={product.colors} />
-          <FilterBox title='Size' options={product.sizes} />
+          <FilterBox
+            onClick={setFilterColor}
+            currentValue={filterColor}
+            isGraphical
+            title='Color'
+            options={product.colors}
+          />
+          <FilterBox
+            onClick={setFilterSize}
+            currentValue={filterSize}
+            title='Size'
+            options={product.sizes}
+          />
         </Styled.Filters>
         <Styled.Buttons>
           <Button isSecondary>

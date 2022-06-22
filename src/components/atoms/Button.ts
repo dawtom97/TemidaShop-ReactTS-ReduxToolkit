@@ -2,8 +2,9 @@ import styled, { css } from 'styled-components';
 import { GlobalStylesProps } from '../../types/GlobalStyles.types';
 
 type ButtonProps = {
-    isSecondary?: boolean,
-    theme: GlobalStylesProps
+  isSecondary?: boolean,
+  theme: GlobalStylesProps,
+  isIconButton?: boolean
 }
 
 export const Button = styled.button<ButtonProps>`
@@ -29,5 +30,12 @@ ${({ isSecondary }) => isSecondary && css`
    width:45px;
    padding: 0;
 `}
+${({ isIconButton }) => isIconButton && css`
+   background-color:none;
+   width:50px;
+   height: 50px;
+   padding:0;
+`
+  }
 
 `
