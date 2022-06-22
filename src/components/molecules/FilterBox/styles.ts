@@ -1,9 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 
 type StylesProps = {
     isGraphical?: boolean;
-    option:string
+    option:string,
+    isCurrent: boolean
 }
 
 
@@ -26,4 +27,7 @@ export const Option = styled.span`
    text-transform: uppercase;
    font-weight: 700;
    border-radius: 6px;
+   ${(props)=>props.isCurrent && css`
+     box-shadow:0px 0px 10px 2px #b1b1b1;
+   `}
 `

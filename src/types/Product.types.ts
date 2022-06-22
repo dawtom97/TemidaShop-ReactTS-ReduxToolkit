@@ -8,5 +8,6 @@ export type ProductProps = {
     id:string,
     short: string,
     colors: string[],
-    sizes: string[]
+    sizes: string[],
+    salePrice: null | number,
 }

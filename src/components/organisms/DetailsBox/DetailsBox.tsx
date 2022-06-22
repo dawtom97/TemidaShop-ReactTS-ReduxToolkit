@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '../../atoms/Button';
 import { FilterBox } from '../../molecules/FilterBox/FilterBox';
 import { Heading } from '../../molecules/Heading/Heading';
@@ -8,18 +8,38 @@ import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import { AiFillHeart } from 'react-icons/ai';
 import { IoIosArrowBack } from 'react-icons/io';
 import { ReturnButton } from '../../atoms/ReturnButton';
+import { ImagesBox } from '../../molecules/ImagesBox/ImagesBox';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../store/store';
+import { addToLiked, removeFromLiked } from '../../../store/features/products/productsSlice';
 
 export const DetailsBox = ({ product }: DetailsProps) => {
-  const [currentImage, setCurrentImage] = useState(product.images[0]);
+  const dispatch = useDispatch();
+  const { likedItems } = useSelector((state: RootState) => state.products);
 
-  const handleImageChange = (index: string) => setCurrentImage(product.images[index]);
-  console.log(product);
+  const [isLiked, setIsLiked] = useState(false);
+  const [currentImage, setCurrentImage] = useState(product.images[0]);
+  const [filterColor, setFilterColor] = useState<string>('');
+  const [filterSize, setFilterSize] = useState<string>('');
 
   useEffect(() => {
     setCurrentImage(product.images[0]);
+    setFilterColor(product.colors[0]);
+    setFilterSize(product.sizes[0]);
 
     return () => setCurrentImage(null);
   }, [product]);
+
+  const handleImageChange = (index: string) => setCurrentImage(product.images[index]);
+
+  const handleAddToLiked = (id: string) => {
+    const isLiked = likedItems.findIndex((item: any) => item.id === id);
+    if (isLiked === -1) {
+      dispatch(addToLiked(product));
+    } else {
+      dispatch(removeFromLiked(id));
+    }
+  };
 
   return (
     <Styled.Wrapper>
@@ -28,11 +48,7 @@ export const DetailsBox = ({ product }: DetailsProps) => {
       </ReturnButton>
       <img src={currentImage} />
 
-      <Styled.Images>
-        {/* {product.images.map((image: string, index: string) => (
-          <img isCurrent={currentImage === index ? true : false} onClick={() => handleImageChange(index)} key={index} src={image} />
-        ))} */}
-      </Styled.Images>
+      <ImagesBox images={product.images} currentImage={currentImage} onClick={handleImageChange} />
 
       <Styled.InfoBox>
         <Styled.Categories>
@@ -42,12 +58,23 @@ export const DetailsBox = ({ product }: DetailsProps) => {
         </Styled.Categories>
         <Heading title={product.title} short={product.short} />
         <Styled.Filters>
-          <FilterBox isGraphical title='Colors' options={product.colors} />
-          <FilterBox title='Size' options={product.sizes} />
+          <FilterBox
+            onClick={setFilterColor}
+            currentValue={filterColor}
+            isGraphical
+            title='Color'
+            options={product.colors}
+          />
+          <FilterBox
+            onClick={setFilterSize}
+            currentValue={filterSize}
+            title='Size'
+            options={product.sizes}
+          />
         </Styled.Filters>
         <Styled.Buttons>
-          <Button isSecondary>
-            <AiFillHeart />
+          <Button isSecondary isLiked={isLiked}>
+            <AiFillHeart onClick={() => handleAddToLiked(product.id)} />
           </Button>
           <Button>
             ${product.price} <HiOutlineArrowNarrowRight />{' '}

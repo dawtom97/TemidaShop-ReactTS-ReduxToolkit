@@ -4,13 +4,15 @@ export const Wrapper = styled.div`
   position: relative;
   & > img {
     width:100%;
-    height: 580px;
+    min-height: 530px;
+    max-height: 700px;
     object-fit: cover;
   }
   & > a {
     position: absolute;
     top:20px;
     left:20px;
+    z-index: 100;
   }
 `
 
@@ -56,7 +58,7 @@ export const Categories = styled.div`
 `
 
 type StylesProps = {
-  isCurrent?:string
+  isCurrent?:boolean
 }
 
 export const Images = styled.div<StylesProps>`
@@ -67,14 +69,6 @@ export const Images = styled.div<StylesProps>`
    flex-direction: column;
    transform: translateY(-50%);
    background-color: #ffffffa8;
-   
    border-radius: 8px;
-  & > img {
-    width:55px;
-    margin:5px;
-    height: 55px;
-    object-fit: cover;
-    border-radius: 8px;
-    opacity: ${({isCurrent}) => isCurrent ? 1 : 0.6}
-  }
+
 `
