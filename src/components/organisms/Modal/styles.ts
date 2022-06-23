@@ -1,7 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-
-export const Wrapper = styled.div`
+type StylesProps = {
+    isFaded:boolean
+}
+export const Wrapper = styled.div<StylesProps>`
    position: fixed;
    background-color: #ffffffa8;
    top:70px;
@@ -14,6 +16,7 @@ export const Wrapper = styled.div`
    display: flex;
    justify-content: center;
    align-items: center;
+   opacity: 0;
    flex-direction: column;
    text-transform: uppercase;
    z-index: 100;
@@ -21,5 +24,21 @@ export const Wrapper = styled.div`
 
    & > p {
     font-size: 1.2rem;
+   }
+
+   ${({isFaded})=> isFaded && css`
+      animation: fadeOut 2s  ease-in forwards 1;
+   `}
+
+   @keyframes fadeOut {
+    20% {
+        opacity: 1;
+    }
+    95% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
    }
 `

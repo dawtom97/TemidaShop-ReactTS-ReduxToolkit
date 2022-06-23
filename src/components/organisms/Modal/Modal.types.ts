@@ -1,4 +1,7 @@
+
+
+
 export type ModalProps = {
-    msg:string,
-    isFaded: boolean
+    msg: string,
+    isFaded: boolean,
 }

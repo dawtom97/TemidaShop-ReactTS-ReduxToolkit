@@ -13,7 +13,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 import { addToLiked, removeFromLiked } from '../../../store/features/products/productsSlice';
 import { ProductProps } from '../../../types/Product.types';
-import { Modal } from '../Modal/Modal';
 import { hideModal, showModal } from '../../../store/features/modal/modalSlice';
 
 export const DetailsBox = ({ product }: DetailsProps) => {
@@ -23,6 +22,7 @@ export const DetailsBox = ({ product }: DetailsProps) => {
   const [currentImage, setCurrentImage] = useState(product.images[0]);
   const [filterColor, setFilterColor] = useState<string>('');
   const [filterSize, setFilterSize] = useState<string>('');
+  const {isOpen} = useSelector((state:RootState)=>state.modal)
 
   useEffect(() => {
     setCurrentImage(product.images[0]);
@@ -90,8 +90,8 @@ export const DetailsBox = ({ product }: DetailsProps) => {
           />
         </Styled.Filters>
         <Styled.Buttons>
-          <Button isSecondary isLiked={isLiked}>
-            <AiFillHeart onClick={() => handleAddToLiked(product.id)} />
+          <Button disabled={isOpen} isSecondary isLiked={isLiked} onClick={() => handleAddToLiked(product.id)} >
+            <AiFillHeart/>
           </Button>
           <Button>
             ${product.price} <HiOutlineArrowNarrowRight />{' '}
