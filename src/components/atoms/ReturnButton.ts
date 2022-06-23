@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 export const ReturnButton = styled(NavLink)`
     width:30px;
+    margin-right:auto;
     height: 30px;
     background-color: ${({theme})=>theme.white};
     display: flex;

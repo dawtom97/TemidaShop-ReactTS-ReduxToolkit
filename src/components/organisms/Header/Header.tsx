@@ -2,21 +2,27 @@ import React from 'react';
 import * as Styled from './styles';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { NavLink } from 'react-router-dom';
-import {IoCartOutline} from 'react-icons/io5'
+import { IoCartOutline } from 'react-icons/io5';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
+import { ReturnButton } from '../../atoms/ReturnButton';
+import { IoIosArrowBack } from 'react-icons/io';
 
 export const Header = () => {
-  const {likedItems} = useSelector((state: RootState) => state.products);
+  const { likedItems } = useSelector((state: RootState) => state.products);
   return (
     <Styled.Wrapper>
+      <ReturnButton to='/'>
+        <IoIosArrowBack />
+      </ReturnButton>
+
       <NavLink to='/liked'>
         <AiOutlineHeart />
-        {likedItems.length ? <span>{likedItems.length}</span>:null}
+        {likedItems.length ? <span>{likedItems.length}</span> : null}
       </NavLink>
       <NavLink to='/cart'>
-         <IoCartOutline/>
-         <span>4</span>
+        <IoCartOutline />
+        <span>4</span>
       </NavLink>
     </Styled.Wrapper>
   );

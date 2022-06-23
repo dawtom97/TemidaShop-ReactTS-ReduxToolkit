@@ -9,6 +9,7 @@ export const HomePage = () => {
 
   return (
     <MainTemplate>
+ 
       <div>
         {allItems.map((product) => (
           <ProductCard

@@ -20,7 +20,6 @@ export const Wrapper = styled.div<StylesProps>`
    flex-direction: column;
    text-transform: uppercase;
    z-index: 100;
-   box-shadow: ${({theme}) => theme.shadowSecondary};
 
    & > p {
     font-size: 1.2rem;
