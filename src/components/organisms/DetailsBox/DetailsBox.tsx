@@ -12,10 +12,14 @@ import { ImagesBox } from '../../molecules/ImagesBox/ImagesBox';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 import { addToLiked, removeFromLiked } from '../../../store/features/products/productsSlice';
+import { ProductProps } from '../../../types/Product.types';
+import { Modal } from '../Modal/Modal';
+import { hideModal, showModal } from '../../../store/features/modal/modalSlice';
 
 export const DetailsBox = ({ product }: DetailsProps) => {
   const dispatch = useDispatch();
   const { likedItems } = useSelector((state: RootState) => state.products);
+  const { isOpen,modalMsg } = useSelector((state: RootState) => state.modal);
 
   const [isLiked, setIsLiked] = useState(false);
   const [currentImage, setCurrentImage] = useState(product.images[0]);
@@ -30,26 +34,34 @@ export const DetailsBox = ({ product }: DetailsProps) => {
   }, [product]);
 
   useEffect(() => {
-    const like = likedItems.findIndex((item: any) => item.id === product.id);
+    const like = likedItems.findIndex((item: ProductProps) => item.id === product.id);
     if (like !== -1) setIsLiked(true);
     return () => setIsLiked(false);
-  }, [product,dispatch]);
+  }, [product, dispatch]);
 
   const handleImageChange = (index: string) => setCurrentImage(product.images[index]);
 
+  const handleToggleModal = (msg:string) => {
+    dispatch(showModal(msg));
+    setTimeout(() => dispatch(hideModal()), 3000);
+  }
+
   const handleAddToLiked = (id: string) => {
-    const isLiked = likedItems.findIndex((item: any) => item.id === id);
-    if (isLiked === -1) {
+    const like = likedItems.findIndex((item: ProductProps) => item.id === id);
+    if (like === -1) {
       dispatch(addToLiked(product));
-     setIsLiked(true);
+      handleToggleModal('Product added to favorites');
+      setIsLiked(true);
     } else {
       dispatch(removeFromLiked(id));
-    setIsLiked(false);
+      handleToggleModal('Product removed from favorites');
+      setIsLiked(false);
     }
   };
 
   return (
     <Styled.Wrapper>
+      {isOpen ? <Modal isFaded msg={modalMsg} /> : null}
       <ReturnButton to='/'>
         <IoIosArrowBack />
       </ReturnButton>
