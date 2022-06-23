@@ -26,9 +26,14 @@ export const DetailsBox = ({ product }: DetailsProps) => {
     setCurrentImage(product.images[0]);
     setFilterColor(product.colors[0]);
     setFilterSize(product.sizes[0]);
-
     return () => setCurrentImage(null);
   }, [product]);
+
+  useEffect(() => {
+    const like = likedItems.findIndex((item: any) => item.id === product.id);
+    if (like !== -1) setIsLiked(true);
+    return () => setIsLiked(false);
+  }, [product,dispatch]);
 
   const handleImageChange = (index: string) => setCurrentImage(product.images[index]);
 
@@ -36,8 +41,10 @@ export const DetailsBox = ({ product }: DetailsProps) => {
     const isLiked = likedItems.findIndex((item: any) => item.id === id);
     if (isLiked === -1) {
       dispatch(addToLiked(product));
+     setIsLiked(true);
     } else {
       dispatch(removeFromLiked(id));
+    setIsLiked(false);
     }
   };
 
