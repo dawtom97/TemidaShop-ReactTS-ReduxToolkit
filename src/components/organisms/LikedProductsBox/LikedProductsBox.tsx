@@ -15,17 +15,17 @@ export const LikedProductsBox = () => {
         {likedItems.length ? (
           likedItems.map((product) => (
             <ProductCard
-            isThumbnail
-            images={product.images}
-            key={product.id}
-            id={product.id}
-            title={product.title}
-            price={product.price}
-            category={product.category}
-          />
+              isThumbnail
+              images={product.images}
+              key={product.id}
+              id={product.id}
+              title={product.title}
+              price={product.price}
+              category={product.category}
+            />
           ))
         ) : (
-                 <Paragraph>Liked products list are empty</Paragraph>
+          <Paragraph>Liked products list are empty</Paragraph>
         )}
       </div>
     </Styled.Wrapper>
