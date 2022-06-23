@@ -19,8 +19,6 @@ import { hideModal, showModal } from '../../../store/features/modal/modalSlice';
 export const DetailsBox = ({ product }: DetailsProps) => {
   const dispatch = useDispatch();
   const { likedItems } = useSelector((state: RootState) => state.products);
-  const { isOpen,modalMsg } = useSelector((state: RootState) => state.modal);
-
   const [isLiked, setIsLiked] = useState(false);
   const [currentImage, setCurrentImage] = useState(product.images[0]);
   const [filterColor, setFilterColor] = useState<string>('');
@@ -61,7 +59,7 @@ export const DetailsBox = ({ product }: DetailsProps) => {
 
   return (
     <Styled.Wrapper>
-      {isOpen ? <Modal isFaded msg={modalMsg} /> : null}
+     
       <ReturnButton to='/'>
         <IoIosArrowBack />
       </ReturnButton>
