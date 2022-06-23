@@ -38,7 +38,12 @@ ${({ isIconButton }) => isIconButton && css`
    width:50px;
    height: 50px;
    padding:0;
+`}
+
+${({ isLiked }) => isLiked && css`
+   color: red;
 `
-  }
+
+}
 
 `

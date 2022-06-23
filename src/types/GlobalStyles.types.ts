@@ -5,5 +5,6 @@ export type GlobalStylesProps = {
     grey:string,
     primary:string,
     secondary:string,
-    shadowPrimary:string
+    shadowPrimary:string,
+    shadowSecondary:string
 }
