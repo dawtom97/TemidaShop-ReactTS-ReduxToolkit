@@ -21,8 +21,16 @@ export const Wrapper = styled.article<StylesProps>`
      align-items: center;
      border-radius: 12px;
      margin-bottom: 15px;
-     box-shadow:${({theme})=>theme.shadowSecondary};
+     box-shadow:${({ theme }) => theme.shadowSecondary};
   `}
+
+  & button {
+    box-shadow: none;
+    margin-left: auto;
+    & > svg {
+      color:#f24141
+    }
+  }
  
 `
 export const ImageBox = styled.div<StylesProps>`
