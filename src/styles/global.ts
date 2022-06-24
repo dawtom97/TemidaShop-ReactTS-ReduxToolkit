@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import { GlobalStylesProps } from '../types/GlobalStyles.types';
 
-export const GlobalStyles = createGlobalStyle<{theme:GlobalStylesProps}>`
+export const GlobalStyles = createGlobalStyle<{ theme: GlobalStylesProps }>`
    *,
    *::before,
    *::after {
@@ -19,7 +19,11 @@ export const GlobalStyles = createGlobalStyle<{theme:GlobalStylesProps}>`
 
     body {
         font-family:'Roboto',sans-serif;
-        background-color: ${props=>props.theme.body};
-        color:${props=>props.theme.text};
+        background-color: ${props => props.theme.body};
+        color:${props => props.theme.text};
+    }
+    a {
+        color:${props => props.theme.text};
+        text-decoration :none ;
     }
 `

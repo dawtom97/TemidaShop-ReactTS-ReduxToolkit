@@ -6,8 +6,6 @@ import { DetailsProps } from './Details.types';
 import * as Styled from './styles';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import { AiFillHeart } from 'react-icons/ai';
-import { IoIosArrowBack } from 'react-icons/io';
-import { ReturnButton } from '../../atoms/ReturnButton';
 import { ImagesBox } from '../../molecules/ImagesBox/ImagesBox';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
@@ -60,9 +58,6 @@ export const DetailsBox = ({ product }: DetailsProps) => {
   return (
     <Styled.Wrapper>
      
-      <ReturnButton to='/'>
-        <IoIosArrowBack />
-      </ReturnButton>
       <img src={currentImage} />
 
       <ImagesBox images={product.images} currentImage={currentImage} onClick={handleImageChange} />

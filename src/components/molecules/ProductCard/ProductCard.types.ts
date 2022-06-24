@@ -3,5 +3,6 @@ export type ProductCardProps = {
     title: string,
     price:number,
     id:string,
-    category: string[]
+    category: string[],
+    isThumbnail?: boolean
 }
