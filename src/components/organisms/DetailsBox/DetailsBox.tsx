@@ -12,15 +12,19 @@ import { RootState } from '../../../store/store';
 import { addToLiked, removeFromLiked } from '../../../store/features/products/productsSlice';
 import { ProductProps } from '../../../types/Product.types';
 import { hideModal, showModal } from '../../../store/features/modal/modalSlice';
+import { addToCart } from '../../../store/features/cart/cartSlice';
 
 export const DetailsBox = ({ product }: DetailsProps) => {
   const dispatch = useDispatch();
   const { likedItems } = useSelector((state: RootState) => state.products);
+  const {items: cartItems} = useSelector((state:RootState) => state.cart)
   const [isLiked, setIsLiked] = useState(false);
   const [currentImage, setCurrentImage] = useState(product.images[0]);
   const [filterColor, setFilterColor] = useState<string>('');
   const [filterSize, setFilterSize] = useState<string>('');
-  const {isOpen} = useSelector((state:RootState)=>state.modal)
+  const {isOpen} = useSelector((state:RootState)=>state.modal);
+
+ // console.log(cartItems)
 
   useEffect(() => {
     setCurrentImage(product.images[0]);
@@ -55,6 +59,19 @@ export const DetailsBox = ({ product }: DetailsProps) => {
     }
   };
 
+  const handleAddToCart = (id:string) => {
+    const inCart = cartItems.findIndex((item) => item.item.id === id);
+    console.log(inCart);
+    if(inCart === -1) {
+      dispatch(addToCart(product));
+      handleToggleModal('Product added to the cart');
+    } else {
+      handleToggleModal('Product is already in the cart')
+    }
+    
+    // const inCart = 
+  }
+
   return (
     <Styled.Wrapper>
      
@@ -88,7 +105,7 @@ export const DetailsBox = ({ product }: DetailsProps) => {
           <Button disabled={isOpen} isSecondary isLiked={isLiked} onClick={() => handleAddToLiked(product.id)} >
             <AiFillHeart/>
           </Button>
-          <Button>
+          <Button onClick={()=>handleAddToCart(product.id)}>
             ${product.price} <HiOutlineArrowNarrowRight />{' '}
           </Button>
         </Styled.Buttons>

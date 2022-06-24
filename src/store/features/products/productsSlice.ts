@@ -1,17 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { products } from '../../../db/fakeData'
-
-type SingleProduct = {
-    id: string,
-    title: string,
-    short: string,
-    price: number,
-    salePrice: null | number,
-    colors: string[],
-    sizes: string[],
-    images: string[],
-    category:string[]
-}
+import { SingleProduct } from '../../../types/SingleProduct.types';
 
 export interface ProductsState {
     allItems: SingleProduct[],
