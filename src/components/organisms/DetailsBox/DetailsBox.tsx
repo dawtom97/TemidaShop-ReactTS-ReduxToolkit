@@ -13,7 +13,6 @@ import { addToLiked, removeFromLiked } from '../../../store/features/products/pr
 import { ProductProps } from '../../../types/Product.types';
 import { hideModal, showModal } from '../../../store/features/modal/modalSlice';
 import { addToCart } from '../../../store/features/cart/cartSlice';
-import { iteratorSymbol } from 'immer/dist/internal';
 
 export const DetailsBox = ({ product }: DetailsProps) => {
   const dispatch = useDispatch();

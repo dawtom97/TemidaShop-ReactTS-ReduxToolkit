@@ -2,12 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { products } from '../../../db/fakeData';
 import { SingleProduct } from '../../../types/SingleProduct.types';
 
-
-type CartItemProps = {
-   item?: SingleProduct,
-   amount?:number
-}
-
 const initialState = {
     items: [
         {
