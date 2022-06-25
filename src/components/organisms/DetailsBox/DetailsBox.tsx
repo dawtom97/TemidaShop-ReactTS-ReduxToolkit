@@ -12,15 +12,20 @@ import { RootState } from '../../../store/store';
 import { addToLiked, removeFromLiked } from '../../../store/features/products/productsSlice';
 import { ProductProps } from '../../../types/Product.types';
 import { hideModal, showModal } from '../../../store/features/modal/modalSlice';
+import { addToCart } from '../../../store/features/cart/cartSlice';
+import {v4 as uuidv4} from 'uuid';
 
 export const DetailsBox = ({ product }: DetailsProps) => {
   const dispatch = useDispatch();
   const { likedItems } = useSelector((state: RootState) => state.products);
+  const { items: cartItems } = useSelector((state: RootState) => state.cart);
   const [isLiked, setIsLiked] = useState(false);
   const [currentImage, setCurrentImage] = useState(product.images[0]);
   const [filterColor, setFilterColor] = useState<string>('');
   const [filterSize, setFilterSize] = useState<string>('');
-  const {isOpen} = useSelector((state:RootState)=>state.modal)
+  const { isOpen } = useSelector((state: RootState) => state.modal);
+
+  // console.log(cartItems)
 
   useEffect(() => {
     setCurrentImage(product.images[0]);
@@ -37,10 +42,10 @@ export const DetailsBox = ({ product }: DetailsProps) => {
 
   const handleImageChange = (index: string) => setCurrentImage(product.images[index]);
 
-  const handleToggleModal = (msg:string) => {
+  const handleToggleModal = (msg: string) => {
     dispatch(showModal(msg));
     setTimeout(() => dispatch(hideModal()), 3000);
-  }
+  };
 
   const handleAddToLiked = (id: string) => {
     const like = likedItems.findIndex((item: ProductProps) => item.id === id);
@@ -55,9 +60,31 @@ export const DetailsBox = ({ product }: DetailsProps) => {
     }
   };
 
+  const handleAddToCart = (id: string) => {
+    const inCart = cartItems.findIndex((item) => {
+      if (item.id === id && item.size === filterSize && item.color === filterColor) return true;
+      return false;
+    });
+
+    if (inCart === -1) {
+      const addProduct = {
+        ...product,
+        cartId: uuidv4(),
+        amount:1,
+        size: filterSize,
+        color: filterColor,
+      };
+      dispatch(addToCart(addProduct));
+      handleToggleModal('Product added to the cart');
+    } else {
+      handleToggleModal('Product is already in the cart');
+    }
+
+    // const inCart =
+  };
+
   return (
     <Styled.Wrapper>
-     
       <img src={currentImage} />
 
       <ImagesBox images={product.images} currentImage={currentImage} onClick={handleImageChange} />
@@ -85,10 +112,15 @@ export const DetailsBox = ({ product }: DetailsProps) => {
           />
         </Styled.Filters>
         <Styled.Buttons>
-          <Button disabled={isOpen} isSecondary isLiked={isLiked} onClick={() => handleAddToLiked(product.id)} >
-            <AiFillHeart/>
+          <Button
+            disabled={isOpen}
+            isSecondary
+            isLiked={isLiked}
+            onClick={() => handleAddToLiked(product.id)}
+          >
+            <AiFillHeart />
           </Button>
-          <Button>
+          <Button disabled={isOpen} onClick={() => handleAddToCart(product.id)}>
             ${product.price} <HiOutlineArrowNarrowRight />{' '}
           </Button>
         </Styled.Buttons>

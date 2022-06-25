@@ -10,6 +10,7 @@ import { IoIosArrowBack } from 'react-icons/io';
 
 export const Header = () => {
   const { likedItems } = useSelector((state: RootState) => state.products);
+  const {items:cartItems} = useSelector((state:RootState) => state.cart);
   return (
     <Styled.Wrapper>
       <ReturnButton to='/'>
@@ -22,7 +23,7 @@ export const Header = () => {
       </NavLink>
       <NavLink to='/cart'>
         <IoCartOutline />
-        <span>4</span>
+        {cartItems.length ? <span>{cartItems.length}</span> : null}
       </NavLink>
     </Styled.Wrapper>
   );
