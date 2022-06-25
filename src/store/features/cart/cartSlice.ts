@@ -11,10 +11,13 @@ type CartItemProps = {
 const initialState = {
     items: [
         {
-            item: products[0],
-            amount: 1
+            ...products[0], 
+            amount: 1,
+            size: 'm',
+            color:'#ea366b'
         }
-    ]
+    ],
+    total: 0
         
     
 }
@@ -24,13 +27,17 @@ const cartSlice = createSlice({
     initialState,
     reducers:{
         addToCart: (state,action:PayloadAction<SingleProduct>) => {
-            console.log(action.payload)
-            const newCartItem: CartItemProps= {
-                item: action.payload,
-                amount:1,
-            }
-            state.items = state.items.concat(newCartItem as never)
-        }
+            state.items = state.items.concat(action.payload as never)
+        },
+        // toPay: (state) => {
+        //     const money = state.items.map(item => {
+        //         const amount = item.amount;
+        //         const price = item.item.price;
+        //         const total = amount * price;
+        //         console.log(total)
+        //     })
+        //     console.log(money)
+        // }
     }
 })
 
