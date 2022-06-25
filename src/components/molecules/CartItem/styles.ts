@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+type StylesProps = {
+    color:string
+}
+
 export const Wrapper = styled.div`
 display: flex;
 align-items: center;
@@ -11,6 +15,12 @@ gap:12px;
     height: 45px;
     object-fit: cover;
     border-radius: 8px;
+  }
+
+  &  p {
+    display: flex;
+    align-items: center;
+    gap:5px;
   }
   
 `
@@ -24,4 +34,13 @@ export const Buttons = styled.div`
     color:${({theme})=>theme.text};
     height: 25px;
   }
+`
+
+export const ColorBox = styled.span`
+   display: inline-block;
+   border-radius: 4px;
+   background-color: ${({color})=>color};
+   width: 15px;
+   height: 15px;
+
 `

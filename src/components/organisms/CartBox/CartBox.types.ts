@@ -13,7 +13,8 @@ export type CartItemsProps = {
         category: string[],
         size: string,
         color:string,
-        amount:number
+        amount:number,
+        cartId:string
     }[],
  
 }

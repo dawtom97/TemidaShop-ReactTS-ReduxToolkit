@@ -1,5 +1,5 @@
 export type CartItemProps = {
-    id: string,
+    cartId: string,
     title: string,
     price: number,
     salePrice?: null | number,

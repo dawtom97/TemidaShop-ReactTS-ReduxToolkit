@@ -1,16 +1,19 @@
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store/store';
 import { CartItem } from '../../molecules/CartItem/CartItem';
 import { CartItemsProps } from './CartBox.types';
 import * as Styled from './styles';
 
 export const CartBox = ({ items }: CartItemsProps) => {
   console.log(items);
+  const {total} = useSelector((state:RootState) => state.cart)
 
   return (
     <Styled.Wrapper>
-      {items.map((item) => (
+      {items.map((item,index) => (
         <CartItem
-          key={item.id}
-          id={item.id}
+          key={index}
+          cartId={item.cartId}
           color={item.color}
           size={item.size}
           image={item.images[0]}
@@ -19,7 +22,7 @@ export const CartBox = ({ items }: CartItemsProps) => {
           amount={item.amount}
         />
       ))}
-      {/* <CartItem image={items.images[0]}/> */}
+      <h2>{total}</h2>
     </Styled.Wrapper>
   );
 };

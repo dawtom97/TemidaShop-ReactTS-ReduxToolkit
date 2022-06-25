@@ -13,6 +13,7 @@ import { addToLiked, removeFromLiked } from '../../../store/features/products/pr
 import { ProductProps } from '../../../types/Product.types';
 import { hideModal, showModal } from '../../../store/features/modal/modalSlice';
 import { addToCart } from '../../../store/features/cart/cartSlice';
+import {v4 as uuidv4} from 'uuid';
 
 export const DetailsBox = ({ product }: DetailsProps) => {
   const dispatch = useDispatch();
@@ -68,6 +69,8 @@ export const DetailsBox = ({ product }: DetailsProps) => {
     if (inCart === -1) {
       const addProduct = {
         ...product,
+        cartId: uuidv4(),
+        amount:1,
         size: filterSize,
         color: filterColor,
       };
