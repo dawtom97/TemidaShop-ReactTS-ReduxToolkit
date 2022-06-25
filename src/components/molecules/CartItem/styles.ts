@@ -8,8 +8,16 @@ export const Wrapper = styled.div`
 display: flex;
 align-items: center;
 padding: 15px 10px;
-background-color: ${({theme})=>theme.white};
+background-color: ${({theme})=>theme.lightGrey};
+border-radius: 12px;
+margin-bottom: 8px;
 gap:12px;
+& > div:first-of-type{
+  flex:2;
+}
+& > div {
+  flex:1;
+}
   & > img {
     width:45px;
     height: 45px;
@@ -36,10 +44,11 @@ export const Buttons = styled.div`
   }
 `
 
-export const ColorBox = styled.span`
+export const ColorBox = styled.span<StylesProps>`
    display: inline-block;
    border-radius: 4px;
    background-color: ${({color})=>color};
+   border:1px solid ${({theme})=>theme.text};
    width: 15px;
    height: 15px;
 

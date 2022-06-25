@@ -38,7 +38,7 @@ export const CartItem = ({ title, color, size, price, image, amount, cartId }: C
         <Paragraph>${price}</Paragraph>
       </div>
       <div>
-        <Paragraph>{amount}</Paragraph>
+        <Paragraph isBold>{amount}</Paragraph>
       </div>
       <Styled.Buttons>
         <Button onClick={() => handleIncreaseAmount(cartId)} isSecondary>

@@ -7,5 +7,6 @@ export const theme = {
     white:'#ffffff',
     shadowPrimary: '0px 5px 18px 1px #c2c4c4',
     shadowSecondary:'0px 1px 9px 0.2px #dddddd',
-    grey: '#c2c4c4'
+    grey: '#c2c4c4',
+    lightGrey: '#f0f0f0'
 }
