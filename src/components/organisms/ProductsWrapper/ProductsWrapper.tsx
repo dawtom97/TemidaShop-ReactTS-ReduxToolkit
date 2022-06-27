@@ -2,7 +2,7 @@ import React from 'react';
 import * as Styled from './styles';
 
 type ProductsWrapperProps = {
-    children?: JSX.Element[]
+    children?: JSX.Element[] | any
 }
 
 export const ProductsWrapper = ({children}:ProductsWrapperProps) => {

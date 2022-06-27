@@ -1,7 +1,7 @@
 import { Header } from '../organisms/Header/Header';
 
 type TemplateProps = {
-    children?:JSX.Element | JSX.Element[]
+    children?:JSX.Element | JSX.Element[] | undefined
 }
 
 export const MainTemplate = ({ children }: TemplateProps) => {
