@@ -1,10 +1,13 @@
 import React from 'react'
+import { Heading } from '../../molecules/Heading/Heading';
 import { ProductFiltersProps } from './ProductFilters.types';
 import * as Styled from './styles';
 
 export const ProductFilters = ({onReset, onChange,categories}:ProductFiltersProps) => {
   return (
-    <Styled.Form action=''>
+    <Styled.Wrapper>
+        <Heading title="Welcome to the Temida Shop" short="Choose one of the categories"/>
+    <Styled.Form action=''> 
     <label onChange={onReset} htmlFor='All'>
       <input type='radio' name='categories' id='All' />
       All
@@ -21,5 +24,6 @@ export const ProductFilters = ({onReset, onChange,categories}:ProductFiltersProp
       </label>
     ))}
   </Styled.Form>
+  </Styled.Wrapper>
   )
 }
