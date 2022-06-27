@@ -45,5 +45,45 @@ export const products = [
             image.product3,
             image.product1
         ]
+    },
+    {
+        id: '4',
+        category: ['dress'],
+        title: 'Green floral dress',
+        short: 'Levis Original Trousers in a classic staple',
+        price: 189.99,
+        salePrice: null,
+        colors: ['#13820f','#5b5b5b'],
+        sizes: ['xs', 's','m'],
+        images: [
+            image.product4,
+            image.product4_1
+        ]
+    },
+    {
+        id: '5',
+        category: ['dress','hat'],
+        title: 'Polka dot dress and white hat',
+        short: 'Levis Original Trousers in a classic staple',
+        price: 219.99,
+        salePrice: null,
+        colors: ['#ae2229','#5b5b5b'],
+        sizes: ['xs', 's','m','l'],
+        images: [
+            image.product5,
+        ]
+    },
+    {
+        id: '6',
+        category: ['dress'],
+        title: 'Beautiful white wedding dress',
+        short: 'Levis Original Trousers in a classic staple',
+        price: 519.99,
+        salePrice: null,
+        colors: ['#ffffff'],
+        sizes: ['xs', 's','m','l'],
+        images: [
+            image.product6,
+        ]
     }
 ]
