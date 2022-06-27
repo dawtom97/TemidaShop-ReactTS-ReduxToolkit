@@ -45,5 +45,19 @@ export const products = [
             image.product3,
             image.product1
         ]
+    },
+    {
+        id: '4',
+        category: ['dress'],
+        title: 'Green floral dress',
+        short: 'Levis Original Trousers in a classic staple',
+        price: 189.99,
+        salePrice: null,
+        colors: ['#13820f','#5b5b5b'],
+        sizes: ['xs', 's','m'],
+        images: [
+            image.product4,
+            image.product4_1
+        ]
     }
 ]
