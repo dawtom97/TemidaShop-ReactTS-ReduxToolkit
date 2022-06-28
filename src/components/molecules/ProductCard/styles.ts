@@ -8,6 +8,7 @@ export const Wrapper = styled.article<StylesProps>`
   width:170px;
   &  p {
     margin-bottom: 5px;
+    min-height: 38px;
   }
   &  span {
     font-size: 1.4rem;

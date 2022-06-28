@@ -22,6 +22,7 @@ export const ProductDetails = () => {
 
   useEffect(() => {
     dispatch(getSingleProduct(id));
+    window.scrollTo(0, 0)
   }, [id]);
 
   if (product) {

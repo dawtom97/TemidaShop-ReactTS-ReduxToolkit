@@ -32,8 +32,17 @@ export const InfoBox = styled.div`
   background-color: #fff;
   position: relative;
   top:-25px;
+
+  & > header:last-of-type {
+    margin-top: 50px;
+    & > p {
+      margin-bottom: 15px;
+    }
+  }
+
   @media screen and (min-width:768px){
       width:50%;
+      top:0;
   }
 `
 
@@ -94,5 +103,24 @@ export const Images = styled.div<StylesProps>`
    transform: translateY(-50%);
    background-color: #ffffffa8;
    border-radius: 8px;
+
+`
+
+export const SimilarProducts = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  & > a {
+    width: 100%;
+    & > article {
+      width: 100%;
+    }
+    @media screen and (min-width:768px){
+
+    width: 30%;
+}
+  }
+
 
 `

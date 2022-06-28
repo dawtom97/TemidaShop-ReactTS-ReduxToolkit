@@ -19,6 +19,7 @@ import { hideModal, showModal } from '../../../store/features/modal/modalSlice';
 import { addToCart } from '../../../store/features/cart/cartSlice';
 import { v4 as uuidv4 } from 'uuid';
 import { ProductCard } from '../../molecules/ProductCard/ProductCard';
+import { Paragraph } from '../../atoms/Paragraph';
 
 export const DetailsBox = ({ product }: DetailsProps) => {
   const dispatch = useDispatch();
@@ -135,9 +136,8 @@ export const DetailsBox = ({ product }: DetailsProps) => {
               ${product.price} <HiOutlineArrowNarrowRight />{' '}
             </Button>
           </Styled.Buttons>
-        </Styled.InfoBox>
-      </Styled.Wrapper>
-      <div>
+          <Heading title="Similar products" short={`See others in category: ${product.category}`} />
+          <Styled.SimilarProducts>
         {similarProducts
           ? similarProducts.map(
               (item) =>
@@ -153,7 +153,12 @@ export const DetailsBox = ({ product }: DetailsProps) => {
                 ),
             )
           : null}
-      </div>
+          {/* 1 becouse always current item is found */}
+          {similarProducts.length === 1 ? <Paragraph isBold>Not found...</Paragraph> : null}
+      </Styled.SimilarProducts>
+        </Styled.InfoBox>
+      </Styled.Wrapper>
+
     </>
   );
 };
