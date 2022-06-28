@@ -4,7 +4,7 @@ import { SingleProduct } from '../../../types/SingleProduct.types';
 
 export interface ProductsState {
     allItems: SingleProduct[],
-    singleItem: any,
+    singleItem: unknown,
     likedItems: SingleProduct[]
 }
 

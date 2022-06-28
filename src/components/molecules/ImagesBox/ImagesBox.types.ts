@@ -1,5 +1,5 @@
 export type ImageBoxProps = {
-    onClick: any ,
+    onClick: (index: number) => void ,
     currentImage: string,
     images: string[]
 }

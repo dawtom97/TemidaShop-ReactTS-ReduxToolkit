@@ -4,11 +4,20 @@ import { useParams } from 'react-router-dom';
 import { DetailsBox } from '../components/organisms/DetailsBox/DetailsBox';
 import { MainTemplate } from '../components/templates/MainTemplate';
 import { getSingleProduct } from '../store/features/products/productsSlice';
+import { SingleProduct } from '../types/SingleProduct.types';
+
+
+type ProductDetails = {
+  products: {
+    singleItem: SingleProduct[]
+  },
+
+}
 
 export const ProductDetails = () => {
   const { id } = useParams<string>();
   const dispatch = useDispatch();
-  const product = useSelector(({ products }: any) => products.singleItem[0]);
+  const product = useSelector(({ products }: ProductDetails ) => products.singleItem[0]);
 
   useEffect(() => {
     dispatch(getSingleProduct(id));
