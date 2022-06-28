@@ -29,8 +29,9 @@ export const productsSlice = createSlice({
         removeFromLiked: (state,action:PayloadAction<string>) => {
             state.likedItems = state.likedItems.filter(item => item.id !== action.payload)
         },
-        getSimilarProducts: (state,action:PayloadAction<string[]>) => {
-            state.similarProducts = state.allItems.filter(product => product.category === action.payload)
+        getSimilarProducts: (state,action:PayloadAction<any>) => {
+            console.log(action.payload)
+            state.similarProducts = state.allItems.filter(product => product.category.includes(action.payload))
         }
     }
 })

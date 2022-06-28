@@ -22,7 +22,7 @@ export const ProductDetails = () => {
 
   useEffect(() => {
     dispatch(getSingleProduct(id));
-  }, []);
+  }, [id]);
 
   if (product) {
     return (
