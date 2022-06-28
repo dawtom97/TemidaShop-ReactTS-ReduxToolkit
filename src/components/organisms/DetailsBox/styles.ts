@@ -14,6 +14,15 @@ export const Wrapper = styled.div`
     left:20px;
     z-index: 100;
   }
+  @media screen and (min-width:768px){
+    display: flex;
+    width:1444px;
+
+    & > img {
+      width:50%;
+      border-radius: 23px;
+    }
+  }
 `
 
 
@@ -23,6 +32,18 @@ export const InfoBox = styled.div`
   background-color: #fff;
   position: relative;
   top:-25px;
+
+  & > header:last-of-type {
+    margin-top: 50px;
+    & > p {
+      margin-bottom: 15px;
+    }
+  }
+
+  @media screen and (min-width:768px){
+      width:50%;
+      top:0;
+  }
 `
 
 export const Filters = styled.div`
@@ -40,6 +61,11 @@ export const Categories = styled.div`
    position: absolute;
    top:-40px;
    right:20px;
+   @media screen and (min-width:768px){
+      position:relative;
+      top:0;
+      left:0;
+  }
 
    & > span {
     display: inline-block;
@@ -54,11 +80,18 @@ export const Categories = styled.div`
     font-weight: 700;
     letter-spacing: 1px;
     font-size: 1.3rem;
+    @media screen and (min-width:768px){
+
+        text-align: left;
+        margin-left: 0;
+        min-width: initial;
+        margin-right: 15px;
+  }
    }
 `
 
 type StylesProps = {
-  isCurrent?:boolean
+  isCurrent?: boolean
 }
 
 export const Images = styled.div<StylesProps>`
@@ -70,5 +103,24 @@ export const Images = styled.div<StylesProps>`
    transform: translateY(-50%);
    background-color: #ffffffa8;
    border-radius: 8px;
+
+`
+
+export const SimilarProducts = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  & > a {
+    width: 100%;
+    & > article {
+      width: 100%;
+    }
+    @media screen and (min-width:768px){
+
+    width: 30%;
+}
+  }
+
 
 `

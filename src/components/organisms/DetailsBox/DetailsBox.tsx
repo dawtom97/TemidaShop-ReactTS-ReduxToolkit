@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import { Button } from '../../atoms/Button';
 import { FilterBox } from '../../molecules/FilterBox/FilterBox';
 import { Heading } from '../../molecules/Heading/Heading';
@@ -9,11 +9,17 @@ import { AiFillHeart } from 'react-icons/ai';
 import { ImagesBox } from '../../molecules/ImagesBox/ImagesBox';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
-import { addToLiked, removeFromLiked } from '../../../store/features/products/productsSlice';
+import {
+  addToLiked,
+  getSimilarProducts,
+  removeFromLiked,
+} from '../../../store/features/products/productsSlice';
 import { ProductProps } from '../../../types/Product.types';
 import { hideModal, showModal } from '../../../store/features/modal/modalSlice';
 import { addToCart } from '../../../store/features/cart/cartSlice';
 import { v4 as uuidv4 } from 'uuid';
+import { ProductCard } from '../../molecules/ProductCard/ProductCard';
+import { Paragraph } from '../../atoms/Paragraph';
 
 export const DetailsBox = ({ product }: DetailsProps) => {
   const dispatch = useDispatch();
@@ -24,6 +30,7 @@ export const DetailsBox = ({ product }: DetailsProps) => {
   const [filterColor, setFilterColor] = useState<string>('');
   const [filterSize, setFilterSize] = useState<string>('');
   const { isOpen } = useSelector((state: RootState) => state.modal);
+  const similarProducts = useSelector((state: RootState) => state.products.similarProducts);
 
   useEffect(() => {
     setCurrentImage(product.images[0]);
@@ -37,6 +44,10 @@ export const DetailsBox = ({ product }: DetailsProps) => {
     if (like !== -1) setIsLiked(true);
     return () => setIsLiked(false);
   }, [product, dispatch]);
+
+  useEffect(() => {
+    dispatch(getSimilarProducts(product.category[0]));
+  }, [product]);
 
   const handleImageChange = (index: number) => setCurrentImage(product.images[index]);
 
@@ -59,9 +70,6 @@ export const DetailsBox = ({ product }: DetailsProps) => {
   };
 
   const handleAddToCart = (id: string) => {
-
-    console.log('próbuje dodać do koszyka')
-
     const inCart = cartItems.findIndex((item) => {
       if (item.id === id && item.size === filterSize && item.color === filterColor) return true;
       return false;
@@ -83,47 +91,74 @@ export const DetailsBox = ({ product }: DetailsProps) => {
   };
 
   return (
-    <Styled.Wrapper>
-      <img src={currentImage} />
+    <>
+      <Styled.Wrapper>
+        <img src={currentImage} />
 
-      <ImagesBox images={product.images} currentImage={currentImage} onClick={handleImageChange} />
+        <ImagesBox
+          images={product.images}
+          currentImage={currentImage}
+          onClick={handleImageChange}
+        />
 
-      <Styled.InfoBox>
-        <Styled.Categories>
-          {product.category.map((cat, index) => (
-            <span key={index}>{cat}</span>
-          ))}
-        </Styled.Categories>
-        <Heading title={product.title} short={product.short} />
-        <Styled.Filters>
-          <FilterBox
-            onClick={setFilterColor}
-            currentValue={filterColor}
-            isGraphical
-            title='Color'
-            options={product.colors}
-          />
-          <FilterBox
-            onClick={setFilterSize}
-            currentValue={filterSize}
-            title='Size'
-            options={product.sizes}
-          />
-        </Styled.Filters>
-        <Styled.Buttons>
-          <Button
-            disabled={isOpen}
-            isSecondary
-            isLiked={isLiked}
-            onClick={() => handleAddToLiked(product.id)}
-          >
-            <AiFillHeart />
-          </Button>
-          <Button disabled={isOpen} onClick={() => handleAddToCart(product.id)}>
-            ${product.price} <HiOutlineArrowNarrowRight />{' '}
-          </Button>
-        </Styled.Buttons>
-      </Styled.InfoBox>
-    </Styled.Wrapper>
+        <Styled.InfoBox>
+          <Styled.Categories>
+            {product.category.map((cat, index) => (
+              <span key={index}>{cat}</span>
+            ))}
+          </Styled.Categories>
+          <Heading title={product.title} short={product.short} />
+          <Styled.Filters>
+            <FilterBox
+              onClick={setFilterColor}
+              currentValue={filterColor}
+              isGraphical
+              title='Color'
+              options={product.colors}
+            />
+            <FilterBox
+              onClick={setFilterSize}
+              currentValue={filterSize}
+              title='Size'
+              options={product.sizes}
+            />
+          </Styled.Filters>
+          <Styled.Buttons>
+            <Button
+              disabled={isOpen}
+              isSecondary
+              isLiked={isLiked}
+              onClick={() => handleAddToLiked(product.id)}
+            >
+              <AiFillHeart />
+            </Button>
+            <Button disabled={isOpen} onClick={() => handleAddToCart(product.id)}>
+              ${product.price} <HiOutlineArrowNarrowRight />{' '}
+            </Button>
+          </Styled.Buttons>
+          <Heading title="Similar products" short={`See others in category: ${product.category}`} />
+          <Styled.SimilarProducts>
+        {similarProducts
+          ? similarProducts.map(
+              (item) =>
+                product.id !== item.id && (
+                  <ProductCard
+                    images={item.images}
+                    key={item.id}
+                    id={item.id}
+                    title={item.title}
+                    price={item.price}
+                    category={item.category}
+                  />
+                ),
+            )
+          : null}
+          {/* 1 becouse always current item is found */}
+          {similarProducts.length === 1 ? <Paragraph isBold>Not found...</Paragraph> : null}
+      </Styled.SimilarProducts>
+        </Styled.InfoBox>
+      </Styled.Wrapper>
+
+    </>
   );
 };
