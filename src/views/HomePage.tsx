@@ -1,16 +1,17 @@
-import React, { SetStateAction, useEffect, useMemo, useState } from 'react';
+import {useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ProductCard } from '../components/molecules/ProductCard/ProductCard';
 import { ProductFilters } from '../components/organisms/ProductFilters/ProductFilters';
 import { ProductsWrapper } from '../components/organisms/ProductsWrapper/ProductsWrapper';
 import { MainTemplate } from '../components/templates/MainTemplate';
 import { RootState } from '../store/store';
+import { SingleProduct } from '../types/SingleProduct.types';
 
 export const HomePage = () => {
   const { allItems } = useSelector((state: RootState) => state.products);
-  const [filteredItems, setFileredItems] = useState<SetStateAction<[]>[]>([]);
-  const [categories, setCategories] = useState<any>([]);
-  const [selectedCategory, setSelectedCategory] = useState<SetStateAction<string>>('');
+  const [filteredItems, setFileredItems] = useState<SingleProduct[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
 
   useEffect(() => {
     const flatCategories: string[] = [];
@@ -23,9 +24,9 @@ export const HomePage = () => {
     setCategories(flatCategories.flat());
   }, []);
 
-  const showFilteredItems = useMemo(() => {
+  useMemo(() => {
     if (!selectedCategory) return;
-    const items: any = allItems.filter((item: any) => item.category.includes(selectedCategory));
+    const items:SingleProduct[]= allItems.filter((item: SingleProduct) => item.category.includes(selectedCategory));
     setFileredItems(items);
   }, [selectedCategory]);
 
@@ -52,7 +53,7 @@ export const HomePage = () => {
                 category={product.category}
               />
             ))
-          : filteredItems.map((product: any) => (
+          : filteredItems.map((product: SingleProduct) => (
               <ProductCard
                 images={product.images}
                 key={product.id}

@@ -25,8 +25,6 @@ export const DetailsBox = ({ product }: DetailsProps) => {
   const [filterSize, setFilterSize] = useState<string>('');
   const { isOpen } = useSelector((state: RootState) => state.modal);
 
-  // console.log(cartItems)
-
   useEffect(() => {
     setCurrentImage(product.images[0]);
     setFilterColor(product.colors[0]);
@@ -44,7 +42,7 @@ export const DetailsBox = ({ product }: DetailsProps) => {
 
   const handleToggleModal = (msg: string) => {
     dispatch(showModal(msg));
-    setTimeout(() => dispatch(hideModal()), 3000);
+    setTimeout(() => dispatch(hideModal()), 2000);
   };
 
   const handleAddToLiked = (id: string) => {
@@ -61,6 +59,9 @@ export const DetailsBox = ({ product }: DetailsProps) => {
   };
 
   const handleAddToCart = (id: string) => {
+
+    console.log('próbuje dodać do koszyka')
+
     const inCart = cartItems.findIndex((item) => {
       if (item.id === id && item.size === filterSize && item.color === filterColor) return true;
       return false;
@@ -79,8 +80,6 @@ export const DetailsBox = ({ product }: DetailsProps) => {
     } else {
       handleToggleModal('Product is already in the cart');
     }
-
-    // const inCart =
   };
 
   return (
