@@ -7,7 +7,7 @@ import { RootState } from './store/store';
 import { CartPage } from './views/CartPage';
 import { HomePage } from './views/HomePage';
 import { LikedProducts } from './views/LikedProducts';
-import { ProductDetails } from './views/ProductDetails';
+import { ProductDetails } from './views/ProductDetails/ProductDetails';
 
 const App: React.FC = () => {
   const { isOpen, modalMsg } = useSelector((state: RootState) => state.modal);

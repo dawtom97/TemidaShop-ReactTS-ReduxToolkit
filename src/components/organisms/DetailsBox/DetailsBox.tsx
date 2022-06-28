@@ -60,8 +60,6 @@ export const DetailsBox = ({ product }: DetailsProps) => {
 
   const handleAddToCart = (id: string) => {
 
-    console.log('próbuje dodać do koszyka')
-
     const inCart = cartItems.findIndex((item) => {
       if (item.id === id && item.size === filterSize && item.color === filterColor) return true;
       return false;
