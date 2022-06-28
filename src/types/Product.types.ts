@@ -1,7 +1,7 @@
 
 
 export type ProductProps = {
-    images: string[] | string | any,
+    images: string[],
     category: string[],
     title:string,
     price:number,
@@ -10,4 +10,5 @@ export type ProductProps = {
     colors: string[],
     sizes: string[],
     salePrice: null | number,
+    cartId?: string
 }

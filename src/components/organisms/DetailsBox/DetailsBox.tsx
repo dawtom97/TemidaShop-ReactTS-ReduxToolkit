@@ -13,14 +13,14 @@ import { addToLiked, removeFromLiked } from '../../../store/features/products/pr
 import { ProductProps } from '../../../types/Product.types';
 import { hideModal, showModal } from '../../../store/features/modal/modalSlice';
 import { addToCart } from '../../../store/features/cart/cartSlice';
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 export const DetailsBox = ({ product }: DetailsProps) => {
   const dispatch = useDispatch();
   const { likedItems } = useSelector((state: RootState) => state.products);
   const { items: cartItems } = useSelector((state: RootState) => state.cart);
   const [isLiked, setIsLiked] = useState(false);
-  const [currentImage, setCurrentImage] = useState(product.images[0]);
+  const [currentImage, setCurrentImage] = useState<string>(product.images[0]);
   const [filterColor, setFilterColor] = useState<string>('');
   const [filterSize, setFilterSize] = useState<string>('');
   const { isOpen } = useSelector((state: RootState) => state.modal);
@@ -31,7 +31,7 @@ export const DetailsBox = ({ product }: DetailsProps) => {
     setCurrentImage(product.images[0]);
     setFilterColor(product.colors[0]);
     setFilterSize(product.sizes[0]);
-    return () => setCurrentImage(null);
+    return () => setCurrentImage('');
   }, [product]);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export const DetailsBox = ({ product }: DetailsProps) => {
     return () => setIsLiked(false);
   }, [product, dispatch]);
 
-  const handleImageChange = (index: string) => setCurrentImage(product.images[index]);
+  const handleImageChange = (index: number) => setCurrentImage(product.images[index]);
 
   const handleToggleModal = (msg: string) => {
     dispatch(showModal(msg));
@@ -70,7 +70,7 @@ export const DetailsBox = ({ product }: DetailsProps) => {
       const addProduct = {
         ...product,
         cartId: uuidv4(),
-        amount:1,
+        amount: 1,
         size: filterSize,
         color: filterColor,
       };
